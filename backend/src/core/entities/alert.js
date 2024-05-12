@@ -1,7 +1,8 @@
 class Alert {
-    constructor(idAlerta, idTransaction, idRule, action) {
-        this.idAlerta = idAlerta; 
+    constructor(idAlert, idTransaction, idUser, idRule, action) {
+        this.idAlert = idAlert; 
         this.idTransaction = idTransaction; 
+        this.idUser = idUser; 
         this.idRule = idRule; 
         this.action = action; 
     }
