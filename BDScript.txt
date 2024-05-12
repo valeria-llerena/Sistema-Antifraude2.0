@@ -1,0 +1,51 @@
+CREATE DATABASE `sistemaantifraude` 
+CREATE TABLE `user` (
+  `iduser` int NOT NULL,
+  `isempresa` tinyint NOT NULL,
+  `nombres` varchar(45) NOT NULL,
+  `correo` varchar(200) NOT NULL,
+  `telefono` int NOT NULL,
+  PRIMARY KEY (`iduser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `rule` (
+  `idrule` int NOT NULL,
+  `minhour` timestamp(4) NULL DEFAULT NULL,
+  `maxhour` timestamp(4) NULL DEFAULT NULL,
+  `maxamount` float DEFAULT '100000000',
+  `maxtransaction` int DEFAULT NULL,
+  PRIMARY KEY (`idrule`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `transactions` (
+  `transactionId` int NOT NULL AUTO_INCREMENT,
+  `userid` int NOT NULL,
+  `amount` float NOT NULL,
+  `date` datetime NOT NULL,
+  `ip` varchar(32) NOT NULL,
+  `isfraud` tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (`transactionId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `alert` (
+  `idalert` int NOT NULL,
+  `idtransaction` int NOT NULL,
+  `idRule` int NOT NULL,
+  `action` varchar(45) NOT NULL,
+  `idUser` int NOT NULL,
+  PRIMARY KEY (`idalert`),
+  KEY `idRule` (`idRule`) /*!80000 INVISIBLE */,
+  KEY `idTransaction` (`idtransaction`),
+  KEY `idUser` (`idUser`),
+  CONSTRAINT `idRule` FOREIGN KEY (`idRule`) REFERENCES `rule` (`idrule`),
+  CONSTRAINT `idTransaction` FOREIGN KEY (`idtransaction`) REFERENCES `transactions` (`transactionId`),
+  CONSTRAINT `idUser` FOREIGN KEY (`idUser`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `ip` (
+  `idip` int NOT NULL AUTO_INCREMENT,
+  `ip` varchar(45) NOT NULL,
+  PRIMARY KEY (`idip`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
