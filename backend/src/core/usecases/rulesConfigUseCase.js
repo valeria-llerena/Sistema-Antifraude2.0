@@ -16,7 +16,7 @@ class rulesConfigUseCase {
 
     }
 
-    async setNewRules(newRule, newips) {
+    async setNewRules(newRule) {
         const rulesIp = await this.getCurrentRules();
         const rule = rulesIp.rules[0];
         if (newRule.minHour !== undefined) {

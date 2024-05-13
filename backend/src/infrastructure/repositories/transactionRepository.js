@@ -6,7 +6,7 @@ class TransactionRepository {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: 'Forevercfr',
+            password: '@87d8rOg7MU3',
             database: 'sistemaantifraude'
         });
         this.connection.connect(error => {
