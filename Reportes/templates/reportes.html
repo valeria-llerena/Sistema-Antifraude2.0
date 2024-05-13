@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="reportes-content">
+    <div class="graficos">
+        <img src="data:image/png;base64,{{ imagen }}" alt="Gráfico de Transacciones" class="grafico">
+    </div>
+    <div class="grafico-plotly">
+        {{ plotly_grafico | safe }}
+    </div>
+    <div class="graficos">
+        <img src="data:image/png;base64,{{ imagen2 }}" alt="Gráfico de Transacciones" class="grafico">
+    </div>
+    <div class="grafico-plotly">
+        {{ plotly_grafico | safe }}
+    </div>
+</div>
+
+{% endblock %}

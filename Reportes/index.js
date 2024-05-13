@@ -7,13 +7,13 @@ app.use(express.json()); // Para parsear JSON
 app.use(cors()); // Habilitar CORS para todas las rutas
 
 // Rutas
-const fraudRoutes = require('./backend/src/interfaces/routes/fraudRoutes');
+const fraudRoutes = require('./src/interfaces/routes/fraudRoutes');
 app.use('/api', fraudRoutes); // Usar las rutas de detección de fraude en el endpoint '/api'
-const rulesRoutes = require('../Sistema-Antifraude2.0/backend/src/interfaces/routes/rulesRoutes');
+const rulesRoutes = require('./src/interfaces/routes/rulesRoutes');
 app.use('/api', rulesRoutes )
-const alertRoutes = require('../Sistema-Antifraude2.0/backend/src/interfaces/routes/alertRoutes');
+const alertRoutes = require('./src/interfaces/routes/alertRoutes');
 app.use('/api', alertRoutes )
-const reportRoutes= require('../Sistema-Antifraude2.0/backend/src/interfaces/routes/reportRoutes');
+const reportRoutes= require('./src/interfaces/routes/reportRoutes');
 app.use('/api', reportRoutes )
 
 const PORT = process.env.PORT || 5000;

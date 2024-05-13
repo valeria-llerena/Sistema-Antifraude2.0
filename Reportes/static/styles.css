@@ -1,0 +1,64 @@
+/* styles.css */
+
+.topnav {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    transition: top 0.3s;
+}
+
+.topnav h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.sidebar {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: left 0.3s; /* Agregamos una transición para el movimiento */
+}
+
+.sidebar-buttons {
+    margin-top: 20px;
+}
+
+.sidebar-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: aqua;
+    color: white;
+    cursor: pointer;
+}
+
+.content {
+    margin-left: 250px;
+    margin-top: 60px; /* Altura de la barra superior */
+    padding: 20px;
+}
+
+/* Estilos para los gráficos */
+.grafico {
+    width: calc(100% - 250px); /* Ancho total menos el ancho de la barra lateral */
+    margin-left: 250px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para ocultar la barra lateral al hacer scroll hacia abajo */
+.sidebar.hidden {
+    left: -250px; /* Mueve la barra lateral fuera de la pantalla */
+}

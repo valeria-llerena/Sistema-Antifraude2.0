@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
-const Rules = require('../../core/entities/rules');
+const Transaction = require('../../core/entities/transaction');
 
-class RulesRepository {
+class TransactionRepository {
     constructor() {
         this.connection = mysql.createConnection({
             host: 'localhost',
@@ -15,34 +15,32 @@ class RulesRepository {
         });
     }
 
-    getAllRules() {
+    getAllTransactions() {
         return new Promise((resolve, reject) => {
-            this.connection.query('SELECT * FROM rule', (error, results) => {
+            this.connection.query('SELECT * FROM transactions', (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
-                    const rules = results.map(row => new Rules(row.idrule, row.minhour, row.maxhour, row.maxamount, row.maxtransaction));
-                    console.log(results)
-                    resolve(rules);
+                    const transactions = results.map(row => new Transaction(row.transactionId, row.userid,  row.amount, row.date, row.ip, row.isfraud));
+                    resolve(transactions);
                 }
             });
         });
     }
 
-    actualizarIsFraud(transactionId) {
+    setFraud(){
         return new Promise((resolve, reject) => {
-            const sql = `UPDATE transaction SET isfraud = 1 WHERE transactionid = ?`;
-    
-            this.connection.query(sql, [transactionId], (error, results) => {
+            this.connection.query('UPDATE transaction SET isfraude=0 where ', [newRule.minHour,
+                 newRule.maxHour, newRule.maxAmount, newRule.maxTransaction], (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
-                    resolve("Campo 'isfraud' actualizado correctamente");
+                    resolve("OK");
                 }
             });
         });
     }
-    
 }
 
-module.exports = RulesRepository;
+
+module.exports = TransactionRepository;
