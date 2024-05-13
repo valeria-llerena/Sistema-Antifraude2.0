@@ -11,6 +11,8 @@ const fraudRoutes = require('./backend/src/interfaces/routes/fraudRoutes');
 app.use('/api', fraudRoutes); // Usar las rutas de detección de fraude en el endpoint '/api'
 const rulesRoutes = require('../Sistema-Antifraude2.0/backend/src/interfaces/routes/rulesRoutes');
 app.use('/api', rulesRoutes )
+const alertRoutes = require('../Sistema-Antifraude2.0/backend/src/interfaces/routes/alertRoutes');
+app.use('/api', alertRoutes )
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

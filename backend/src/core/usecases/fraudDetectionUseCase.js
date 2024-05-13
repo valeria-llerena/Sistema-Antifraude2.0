@@ -1,10 +1,14 @@
 const TransactionRepository = require('../../infrastructure/repositories/transactionRepository');
 const RulesRepository = require('../../core/usecases/rulesConfigUseCase')
-const Rules = require('../../core/entities/rules')
+const AlertShowUseCase=require('../../core/usecases/alertShowUseCase');
+const Rules = require('../../core/entities/rules');
+const AlertRepository = require('../../infrastructure/repositories/alertRepository');
 class FraudDetectionUseCase {
     constructor() {
         this.transactionRepository = new TransactionRepository();
-        this.rulesRepository = new RulesRepository(); 
+        this.rulesRepository = new RulesRepository();
+        this.alertRepository = new AlertRepository();
+
     }
     async detectFraud() {
         const transactions = await this.transactionRepository.getAllTransactions();

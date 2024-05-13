@@ -6,7 +6,7 @@ class TransactionRepository {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: '@87d8rOg7MU3',
+            password: 'Forevercfr',
             database: 'sistemaantifraude'
         });
         this.connection.connect(error => {
@@ -27,6 +27,20 @@ class TransactionRepository {
             });
         });
     }
+
+    setFraud(){
+        return new Promise((resolve, reject) => {
+            this.connection.query('UPDATE transaction SET isfraude=0 where ', [newRule.minHour,
+                 newRule.maxHour, newRule.maxAmount, newRule.maxTransaction], (error, results) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve("OK");
+                }
+            });
+        });
+    }
 }
+
 
 module.exports = TransactionRepository;
