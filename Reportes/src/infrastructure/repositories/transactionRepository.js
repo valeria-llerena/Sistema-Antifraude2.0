@@ -6,7 +6,7 @@ class TransactionRepository {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: '@87d8rOg7MU3',
+            password: 'Forevercfr',
             database: 'sistemaantifraude'
         });
         this.connection.connect(error => {
@@ -21,22 +21,12 @@ class TransactionRepository {
                 if (error) {
                     reject(error);
                 } else {
-                    // Verifica la estructura de los resultados
-                    console.log(results);
-    
-                    // Mapeo de resultados a objetos de transacción
-                    const transactions = results.map(row => new Transaction(row.transactionId, row.userid, row.amount, row.date, row.ip, row.isfraud));
-                    
-                    // Verifica los objetos de transacción
-                    console.log(transactions);
-    
+                    const transactions = results.map(row => new Transaction(row.transactionId, row.userid,  row.amount, row.date, row.ip, row.isfraud));
                     resolve(transactions);
                 }
             });
         });
     }
-    
-    
 
     setFraud(){
         return new Promise((resolve, reject) => {
