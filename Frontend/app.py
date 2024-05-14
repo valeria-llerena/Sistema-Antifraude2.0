@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests
+
 import matplotlib.pyplot as plt
 import numpy as np
 import base64
@@ -40,7 +41,7 @@ def generar_grafico_horizontal(hours):
 
     # Establecer las etiquetas y el título
     ax.set_yticks(range(len(hours)))
-    ax.set_yticklabels(['Hora {}'.format(i) for i in range(len(hours))])  # Etiquetas de las horas del día
+    ax.set_yticklabels(hours)  # Usar las horas directamente como etiquetas
     ax.set_xlabel('Cantidad de Transacciones')
     ax.set_ylabel('Hora del Día')
     ax.set_title('Transacciones por Hora')
@@ -52,6 +53,7 @@ def generar_grafico_horizontal(hours):
     img_data.seek(0)
     img_base64 = base64.b64encode(img_data.getvalue()).decode()
     return img_base64
+
 # Ruta para la página principal
 @app.route('/')
 def index():
@@ -72,11 +74,11 @@ def reportes():
         print(hours)
         # Generar el gráfico circular con los datos procesados
         img_base64 = generar_grafico_circular(fraud_count, non_fraud_count)
-        #img_base64_horizontal = generar_grafico_horizontal(hours)
+        img_base64_horizontal = generar_grafico_horizontal(hours)
 
         # Renderizar la plantilla de reportes y pasarle los datos de la imagen del gráfico circular
-        return render_template('reportes.html',imagen2=img_base64)
-        #return render_template('reportes.html' imagen=img_base64_horizontal)
+        return render_template('reportes.html',imagen=img_base64,imagen2=img_base64_horizontal)
+        #return render_template('reportes.html' imagen2=img_base64_horizontal)
 
     except Exception as e:
         print('Error al obtener los datos de las transacciones:', e)
